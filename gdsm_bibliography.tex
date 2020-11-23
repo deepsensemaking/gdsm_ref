@@ -1,0 +1,1149 @@
+\documentclass[a4paper,10pt]{article}
+
+
+\usepackage[no-math]{fontspec}
+
+
+
+\usepackage{amssymb,amsmath}
+\usepackage{polyglossia}
+\setdefaultlanguage[variant=american]{english}
+\usepackage{csquotes}
+\usepackage[
+% a4paper,
+a3paper,
+landscape,
+top         = 1.80cm,
+headsep     = 0.20cm,
+bottom      = 1.50cm,
+left        = 1.80cm,
+right       = 1.80cm,
+% headheight  = 3.00cm,
+footnotesep = 0.10cm,
+footskip    = 0.50cm,
+% showframe,
+]{geometry}
+\usepackage{setspace}
+% \singlespacing
+% \onehalfspacing
+\doublespacing
+
+\usepackage{textcomp}
+
+\usepackage{url}
+
+\usepackage{threeparttable}
+\usepackage{booktabs}
+\usepackage{multirow,tabularx}
+\usepackage[tableposition=t]{caption}
+\captionsetup[table]{skip=8pt}
+
+
+\usepackage{soul}
+\setul{2.25pt}{0.5pt}
+
+
+\newcommand{\myTitle}{}
+
+\usepackage[usenames,dvipsnames,svgnames,x11names,table]{xcolor}
+\definecolor{myLink9ColorForeground}{RGB}{0,0,0} % {   0,  74, 148 } % blue
+\definecolor{myLink0ColorForeground}{RGB}{0,0,0} % {   0, 118, 148 } % blue
+\definecolor{myLink1ColorForeground}{RGB}{0,0,0} % { 111,   0, 148 } % purple
+\definecolor{block-gray}{gray}{0.95}
+
+
+\usepackage{float}
+
+\usepackage{pgfgantt}
+
+\ganttset{
+  % this is overridden later on
+  group/.append     style={orange},
+}
+
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.25pt}
+\renewcommand{\footrulewidth}{0.25pt}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+
+
+
+\PassOptionsToPackage{%
+  dateabbrev=false,
+  natbib=true,
+  % longnamesfirst,
+  % style=authoryear,
+  style=apa6,
+  % apabackref=false,
+  backref=false,
+  backrefstyle=two,
+  dashed=false,
+  hyperref=true,
+  backend=biber,
+  mincitenames=1,
+  maxcitenames=2,
+  minbibnames=1,
+  maxbibnames=99,
+  firstinits=true, % deprecated
+  giveninits=false,
+  uniquename=init,
+  citetracker=true,
+  parentracker=true,
+  url=false,
+  doi=false,
+  % isbn=false,
+  % eprint=false,
+  % useprefix=true,
+}{biblatex}
+
+\usepackage{biblatex}
+
+\addbibresource{bibliography.bib} % Specify the bibliography file to include publications
+\usepackage[super]{nth}
+
+
+
+
+% % https://tex.stackexchange.com/questions/55425/pdfbookmark-to-page-number-and-location-with-includepdf
+% pdfpages package simplifies the inclusion of external multi-page PDF documents in LaTeX documents
+% \usepackage{pdfpages} % use after prelude_figures
+% \usepackage[]{placebookmarks}
+
+% hyperref should be loaded as one of the last packages
+% giving it a fighting chance of not being over-written
+
+\usepackage{hyperref}
+
+
+\hypersetup{%
+  % ps2pdf           = true,%                % ***
+  unicode           = true,%
+  colorlinks        = true,%
+  citecolor         = myLink0ColorForeground,%        % [ dkc | black | cyan ]    color for bibliographical citations in text
+  linkcolor         = myLink0ColorForeground,%        % [ dkc | black | cyan ]    color for normal INTERNAL links
+  urlcolor          = myLink1ColorForeground,%        % [ dkm | black | magenta ]    color of URL links
+  filecolor         = myLink1ColorForeground,%        % [ dkm | black | magenta ]    color of FILE links
+  plainpages        = false,%      % distinguish roman and arabic pagenumbers
+  linktocpage       = true,%       % make page number, not text, be link on TOC, LOF and LOT
+  pagebackref       = true,%       % adds backlink to the end of each item in the bibliography
+  pdfnewwindow      = true,%
+  pdfpagelayout     = SinglePage,%
+  pdfstartview      = Fit,%        % [ Fit | FitV ],%
+  pdfstartpage      = 1,%
+  % pdfpagemode      = FullScreen,%
+  bookmarksopen     = true,%
+  bookmarksnumbered = true,%
+  pdfcreator        = {XeLaTeX},%
+  pdfproducer       = {GNU Emacs 26.3; Org mode 9.3.6; XeTeX 3.14159265-2.6-0.999992; TeX Live 2020},%
+  % hyperindex       = true,%
+  % breaklinks       = true,%
+}
+
+
+
+\AtBeginDocument{
+
+  % ==============================================================================
+  % hypersetup [CONTINUED!]
+  % ==============================================================================
+  \hypersetup%
+	{%
+    pdfauthor   = {Jan Nikadon},%
+    pdftitle    = {The Role of \#Verbs in the Spread and Effectiveness of Messages Aimed at Eliciting Desirable Health-Related Behaviors},%
+    pdfsubject  = {},
+    pdfkeywords	= {key} {words}
+	}
+  % ------------------------------------------------------------------------------
+
+}
+
+
+\def\datepolish{%
+  \def\today{\number\day\space\ifcase\month\or
+    stycznia\or lutego\or marca\or kwietnia\or maja\or czerwca\or
+    lipca\or sierpnia\or września\or października\or
+    listopada\or grudnia\fi\space
+    \number\year}%
+}
+
+
+% length between two different entries, preset to \itemsep
+\setlength\bibitemsep{0.0\baselineskip}
+% length between two entries of different authors
+\setlength\bibnamesep{0.0\baselineskip}
+% length between two entries of authors with different first letter
+\setlength\bibinitsep{0.0\baselineskip}
+% before bibliography spacing
+\AtBeginBibliography{\normalsize\vspace*{-2pt}}
+% \usepackage{parskip}[skip=4cm]
+
+
+\newcommand*{\mybox}[1]{{\fboxsep=0pt\framebox{\strut #1}}}
+
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
+
+\usepackage{caption}
+\captionsetup{font=footnotesize}
+\captionsetup{font=small}
+\captionsetup{labelfont=bf}
+\captionsetup{figurename=Fig.}
+\captionsetup{tablename=Tab.}
+
+
+\newcommand{\SECT}[1]{\textcolor{black}{\textbf{\ul{#1}}}}
+
+\newcommand{\HYPO}[1]{\textcolor{black}{\textbf{\textit{\ul{#1}}}}}
+
+% \newcommand{\EMPH}[1]{\textcolor{black}{\emph{\ul{#1}}}}
+\newcommand{\EMPH}[1]{\textcolor{black}{\textbf{\textit{\ul{#1}}}}}
+
+\newcommand{\STUD}[1]{\textnormal{\textcolor{black}{\textsc{\ul{#1}}}}}
+\newcommand{\TASK}[1]{\textnormal{\textcolor{black}{\textsc{#1}}}}
+
+\newcommand{\HASH}[1]{\textcolor{black}{#1}}
+\newcommand{\ABBR}[1]{\textcolor{black}{#1}}
+\newcommand{\NEW}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\DONE}[1]{#1}
+\newcommand{\FIXED}[1]{\setlength{\fboxsep}{0pt}\colorbox{yellow!25}{#1}}
+\newcommand{\CHECK}[1]{\setlength{\fboxsep}{0pt}\colorbox{red!25}{#1}}
+\renewcommand{\FIXED}[1]{#1}
+\renewcommand{\CHECK}[1]{#1}
+
+
+
+
+% \usepackage[letterspace=125]{microtype}
+% Package microtype Error: Letterspacing currently doesn't work with xetex.
+
+% \newcommand{\spacedit}{\itshape\addfontfeatures{LetterSpace=20}}
+
+
+\begin{document}
+
+
+\noindent\SECT{Citations}
+
+
+\begin{itemize}
+\item
+  \parencite[][]{1914_Pankhurst_MyOwnStory}
+\item
+  \fullcite{1914_Pankhurst_MyOwnStory}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2013_Holtgraves_LanguageSocialAction}
+\item
+  \fullcite{2013_Holtgraves_LanguageSocialAction}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2008_vanZomerenEtAl_IntegrativeSocialIdentityModelCollectiveActionQuantitativeResearch}
+  \parencite[][]{2008_vanZomerenEtAl_IntegrativeSocialIdentityModelCollectiveActionQuantitativeResearch}
+\item
+  \fullcite{2008_vanZomerenEtAl_IntegrativeSocialIdentityModelCollectiveActionQuantitativeResearch}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2016_vanZomeren_BuildingATowerOfBabelIntegratingCoreMotivat}
+\item
+  \fullcite{2016_vanZomeren_BuildingATowerOfBabelIntegratingCoreMotivat}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2001_Ahearn_LanguageAgency}
+\item
+  \fullcite{2001_Ahearn_LanguageAgency}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][p. 13]{2020_Cosentino_SocialMediaPostTruthWorldOrderGlobalDynamicsDisinformation}
+\item
+  \fullcite{2020_Cosentino_SocialMediaPostTruthWorldOrderGlobalDynamicsDisinformation}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][pp 124-128]{2013_Morozov_EverythingClickHereFollyTechnologicalSolutionism}
+\item
+  \fullcite{2013_Morozov_EverythingClickHereFollyTechnologicalSolutionism}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2017_WMC_TheStatusWomenUSMedia2017}
+\item
+  \fullcite{2017_WMC_TheStatusWomenUSMedia2017}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2013_Coates_WomenMenEverydayTalk}
+\item
+  \fullcite{2013_Coates_WomenMenEverydayTalk}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2011_BeckerSwim_SeeingUnseenAttentionDailyEncountersSexismWayReduce}
+\item
+  \fullcite{2011_BeckerSwim_SeeingUnseenAttentionDailyEncountersSexismWayReduce}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2011_Brescoll_WhoTakesFloorWhyGenderPowerVolubilityOrganizations}
+\item
+  \fullcite{2011_Brescoll_WhoTakesFloorWhyGenderPowerVolubilityOrganizations}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2015_Crossley_FacebookFeminismSocialMediaBlogsNewTechnologiesContemporary}
+\item
+  \fullcite{2015_Crossley_FacebookFeminismSocialMediaBlogsNewTechnologiesContemporary}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2020_FloresEtAl_RevivingFeminismSocialMediaClassroomOnlineOfflinePublic}
+\item
+  \fullcite{2020_FloresEtAl_RevivingFeminismSocialMediaClassroomOnlineOfflinePublic}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2013_Schuster_InvisibleFeministsSocialMediaYoungWomenPoliticalParticipation}
+\item
+  \fullcite{2013_Schuster_InvisibleFeministsSocialMediaYoungWomenPoliticalParticipation}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2018_Jackson_YoungFeministsFeminismDigitalMedia}
+\item
+  \fullcite{2018_Jackson_YoungFeministsFeminismDigitalMedia}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2018_RudolfsdottirJohannsdottir_FuckPatriarchyAnalysisDigitalMainstreamMediaDiscussionFreethenipple}
+\item
+  \fullcite{2018_RudolfsdottirJohannsdottir_FuckPatriarchyAnalysisDigitalMainstreamMediaDiscussionFreethenipple}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2018_TurleyFisher_TweetingBackShoutingBackSocialMediaFeministActivism}
+\item
+  \fullcite{2018_TurleyFisher_TweetingBackShoutingBackSocialMediaFeministActivism}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2017_NoorEtAl_SocialPsychologyCollectiveVictimhoodCollectiveVictimhood}
+\item
+  \fullcite{2017_NoorEtAl_SocialPsychologyCollectiveVictimhoodCollectiveVictimhood}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2002_SchmittBranscombe_MeaningConsequencesPerceivedDiscriminationDisadvantagedPrivilegedSocialGroups}
+\item
+  \fullcite{2002_SchmittBranscombe_MeaningConsequencesPerceivedDiscriminationDisadvantagedPrivilegedSocialGroups}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2002_SchmittBranscombe_InternalExternalCausalLociAttributionsPrejudice}
+\item
+  \fullcite{2002_SchmittBranscombe_InternalExternalCausalLociAttributionsPrejudice}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2014_SchmittEtAl_ConsequencesPerceivedDiscriminationPsychologicalWellbeingMetaanalyticReview}
+\item
+  \fullcite{2014_SchmittEtAl_ConsequencesPerceivedDiscriminationPsychologicalWellbeingMetaanalyticReview}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2008_NadlerShnabel_InstrumentalSocioemotionalPathsIntergroupReconciliationNeedsBasedModelSocioemotional}
+  \parencite[][]{2008_NadlerShnabel_InstrumentalSocioemotionalPathsIntergroupReconciliationNeedsBasedModelSocioemotional}
+\item
+  \fullcite{2008_NadlerShnabel_InstrumentalSocioemotionalPathsIntergroupReconciliationNeedsBasedModelSocioemotional}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2008_ShnabelNadler_NeedsbasedModelReconciliationSatisfyingDifferentialEmotionalNeedsVictim}
+\item
+  \fullcite{2008_ShnabelNadler_NeedsbasedModelReconciliationSatisfyingDifferentialEmotionalNeedsVictim}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{1997_KobrynowiczBranscombe_WhoConsidersThemselvesVictimsDiscriminationIndividualDifferencePredictors}
+\item
+  \fullcite{1997_KobrynowiczBranscombe_WhoConsidersThemselvesVictimsDiscriminationIndividualDifferencePredictors}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{1995_LandrineEtAl_PhysicalPsychiatricCorrelatesGenderDiscriminationApplicationScheduleSexist}
+\item
+  \fullcite{1995_LandrineEtAl_PhysicalPsychiatricCorrelatesGenderDiscriminationApplicationScheduleSexist}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2011_StroebeEtAl_WorldJustPlaceCounteringNegativeConsequencesPervasiveDiscrimination}
+\item
+  \fullcite{2011_StroebeEtAl_WorldJustPlaceCounteringNegativeConsequencesPervasiveDiscrimination}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2013_DevriesEtAl_GlobalPrevalenceIntimatePartnerViolenceWomen}
+\item
+  \fullcite{2013_DevriesEtAl_GlobalPrevalenceIntimatePartnerViolenceWomen}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2015_GraciaEtAl_PreliminaryEvaluationAnalogProcedureAssessAcceptabilityIntimatePartner}
+\item
+  \fullcite{2015_GraciaEtAl_PreliminaryEvaluationAnalogProcedureAssessAcceptabilityIntimatePartner}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2017_RodriguezMartinezKhalil_ChangingValuesAttitudesIntimatePartnerViolenceImmigrantsNatives}
+\item
+  \fullcite{2017_RodriguezMartinezKhalil_ChangingValuesAttitudesIntimatePartnerViolenceImmigrantsNatives}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2013_WHO_GlobalRegionalEstimatesViolenceWomenPrevalenceHealthEffects}
+\item
+  \fullcite{2013_WHO_GlobalRegionalEstimatesViolenceWomenPrevalenceHealthEffects}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2013_FuluEtAl_PrevalenceFactorsAssociatedMalePerpetrationIntimatePartnerViolence}
+\item
+  \fullcite{2013_FuluEtAl_PrevalenceFactorsAssociatedMalePerpetrationIntimatePartnerViolence}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2015_JewkesEtAl_WorkMenBoysChangesSocialNormsReductionInequities}
+\item
+  \fullcite{2015_JewkesEtAl_WorkMenBoysChangesSocialNormsReductionInequities}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2005_McManusDorfman_FunctionalTruthSexistDistortionAssessingFeministCritiqueIntimate}
+\item
+  \fullcite{2005_McManusDorfman_FunctionalTruthSexistDistortionAssessingFeministCritiqueIntimate}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2015_BettonEtAl_RoleSocialMediaReducingStigmaDiscrimination}
+\item
+  \fullcite{2015_BettonEtAl_RoleSocialMediaReducingStigmaDiscrimination}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2016_AndalibiEtAl_UnderstandingSocialMediaDisclosuresSexualAbuseLensesSupport}
+\item
+  \fullcite{2016_AndalibiEtAl_UnderstandingSocialMediaDisclosuresSexualAbuseLensesSupport}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2009_Vollhardt_AltruismBornSufferingProsocialBehaviorFollowingAdverseLife}
+\item
+  \fullcite{2009_Vollhardt_AltruismBornSufferingProsocialBehaviorFollowingAdverseLife}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2015_VollhardtBilali_RoleInclusiveExclusiveVictimConsciousnessPredictingIntergroupAttitudes}
+\item
+  \fullcite{2015_VollhardtBilali_RoleInclusiveExclusiveVictimConsciousnessPredictingIntergroupAttitudes}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2018_UyOkubo_ReStoryingTraumaNarrativeFosteringPosttraumaticGrowthCambodianRefugee}
+\item
+  \fullcite{2018_UyOkubo_ReStoryingTraumaNarrativeFosteringPosttraumaticGrowthCambodianRefugee}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2019_Wieskamp_GoingOutThereTellingThisStoryVictimhoodEmpowerment}
+\item
+  \fullcite{2019_Wieskamp_GoingOutThereTellingThisStoryVictimhoodEmpowerment}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2020_BongiornoEtAl_WhyWomenAreBlamedBeingSexuallyHarassedEffectsa}
+\item
+  \fullcite{2020_BongiornoEtAl_WhyWomenAreBlamedBeingSexuallyHarassedEffectsa}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2004_JostEtAl_DecadeSystemJustificationTheoryAccumulatedEvidenceConsciousUnconscious}
+\item
+  \fullcite{2004_JostEtAl_DecadeSystemJustificationTheoryAccumulatedEvidenceConsciousUnconscious}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2003_JostEtAl_SocialInequalityReductionIdeologicalDissonanceBehalfSystemEvidence}
+\item
+  \fullcite{2003_JostEtAl_SocialInequalityReductionIdeologicalDissonanceBehalfSystemEvidence}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2005_JostKay_ExposureBenevolentSexismComplementaryGenderStereotypesConsequencesSpecific}
+\item
+  \fullcite{2005_JostKay_ExposureBenevolentSexismComplementaryGenderStereotypesConsequencesSpecific}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2014_Klandermans_IdentityPoliticsPoliticizedIdentitiesIdentityProcessesDynamicsProtest}
+\item
+  \fullcite{2014_Klandermans_IdentityPoliticsPoliticizedIdentitiesIdentityProcessesDynamicsProtest}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{1999_DruryReicher_IntergroupDynamicsCollectiveEmpowermentSubstantiatingSocialIdentityModel}
+\item
+  \fullcite{1999_DruryReicher_IntergroupDynamicsCollectiveEmpowermentSubstantiatingSocialIdentityModel}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2009_DruryReicher_CollectivePsychologicalEmpowermentModelSocialChangeResearchingCrowds}
+\item
+  \fullcite{2009_DruryReicher_CollectivePsychologicalEmpowermentModelSocialChangeResearchingCrowds}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2006_GuimondEtAl_SocialComparisonSelfstereotypingGenderDifferencesSelfconstruals}
+\item
+  \fullcite{2006_GuimondEtAl_SocialComparisonSelfstereotypingGenderDifferencesSelfconstruals}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2009_LunEtAl_CulturalStereotypesSelfCloserExaminationImplicitSelfStereotyping}
+\item
+  \fullcite{2009_LunEtAl_CulturalStereotypesSelfCloserExaminationImplicitSelfStereotyping}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2012_CadinuGaldi_GenderDifferencesImplicitGenderSelfcategorizationLeadStrongerGender}
+\item
+  \fullcite{2012_CadinuGaldi_GenderDifferencesImplicitGenderSelfcategorizationLeadStrongerGender}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2019_SukEtAl_MeTooNetworkedAcknowledgmentConnectiveActionHowEmpowermentEmpathy}
+\item
+  \fullcite{2019_SukEtAl_MeTooNetworkedAcknowledgmentConnectiveActionHowEmpowermentEmpathy}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2002_BrunstingPostmes_SocialMovementParticipationDigitalAgePredictingOfflineOnline}
+\item
+  \fullcite{2002_BrunstingPostmes_SocialMovementParticipationDigitalAgePredictingOfflineOnline}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2002_PostmesBrunsting_CollectiveActionAgeInternetMassCommunicationOnlineMobilization}
+\item
+  \fullcite{2002_PostmesBrunsting_CollectiveActionAgeInternetMassCommunicationOnlineMobilization}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2004_Suler_OnlineDisinhibitionEffect}
+\item
+  \fullcite{2004_Suler_OnlineDisinhibitionEffect}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2007_Joinson_DisinhibitionInternet}
+\item
+  \fullcite{2007_Joinson_DisinhibitionInternet}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2016_ShumanEtAl_ExplainingNormativeNonnormativeActionRoleImplicitTheoriesImplicit}
+\item
+  \fullcite{2016_ShumanEtAl_ExplainingNormativeNonnormativeActionRoleImplicitTheoriesImplicit}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2014_AbeleWojciszke_CommunalAgenticContentSocialCognition}
+\item
+  \fullcite{2014_AbeleWojciszke_CommunalAgenticContentSocialCognition}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2001_Bandura_SocialCognitiveTheoryAgenticPerspective}
+\item
+  \fullcite{2001_Bandura_SocialCognitiveTheoryAgenticPerspective}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{1994_BaumeisterEtAl_GuiltInterpersonalApproach}
+  \parencite[][]{1994_BaumeisterEtAl_GuiltInterpersonalApproach}
+\item
+  \fullcite{1994_BaumeisterEtAl_GuiltInterpersonalApproach}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2019_PietraszkiewiczEtAl_BigTwoDictionariesCapturingAgencyCommunionNaturalLanguage}
+\item
+  \fullcite{2019_PietraszkiewiczEtAl_BigTwoDictionariesCapturingAgencyCommunionNaturalLanguage}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2017_FormanowiczEtAl_VerbsLinguisticMarkersAgencySocialSideGrammarLinguisticb}
+\item
+  \fullcite{2017_FormanowiczEtAl_VerbsLinguisticMarkersAgencySocialSideGrammarLinguisticb}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2020_FORMANOWICZ_ET_AL_IN_PRESS}
+\item
+  \fullcite{2020_FORMANOWICZ_ET_AL_IN_PRESS}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2020_Formanowicz_VerbIntergroupBiasVerbsAreUsedMoreOftenb}
+\item
+  \fullcite{2020_Formanowicz_VerbIntergroupBiasVerbsAreUsedMoreOftenb}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2011_ViglioccoEtAl_NounsVerbsBrainReviewBehaviouralElectrophysiologicalNeuropsychologicalImaging}
+\item
+  \fullcite{2011_ViglioccoEtAl_NounsVerbsBrainReviewBehaviouralElectrophysiologicalNeuropsychologicalImaging}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2009_MaderaEtAl_GenderLettersRecommendationAcademiaAgenticCommunalDifferences}
+\item
+  \fullcite{2009_MaderaEtAl_GenderLettersRecommendationAcademiaAgenticCommunalDifferences}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2009_BirdEtAl_NaturalLanguageProcessingPython}
+\item
+  \fullcite{2009_BirdEtAl_NaturalLanguageProcessingPython}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2014_ManningEtAl_StanfordCoreNLPNaturalLanguageProcessingToolkit}
+\item
+  \fullcite{2014_ManningEtAl_StanfordCoreNLPNaturalLanguageProcessingToolkit}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2019_ChooEtAl_MeTooTimesUpHealthCareCanCultureAccountabilityEnd}
+\item
+  \fullcite{2019_ChooEtAl_MeTooTimesUpHealthCareCanCultureAccountabilityEnd}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2005_PostmesEtAl_SocialInfluenceSmallGroupsInteractiveModelSocialIdentity}
+\item
+  \fullcite{2005_PostmesEtAl_SocialInfluenceSmallGroupsInteractiveModelSocialIdentity}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{2005_PostmesEtAl_IndividualitySocialInfluenceGroupsInductiveDeductiveRoutesGroup}
+\item
+  \fullcite{2005_PostmesEtAl_IndividualitySocialInfluenceGroupsInductiveDeductiveRoutesGroup}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+\begin{itemize}
+\item
+  \parencite[][]{ITEM}
+\item
+  \fullcite{ITEM}
+\end{itemize}
+\hrule
+
+
+
+
+
+
+
+\newpage
+\noindent\SECT{List of References}
+\printbibliography[heading=none]
+
+
+
+
+\end{document}
